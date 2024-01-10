@@ -6,19 +6,24 @@ class App:
         self.window_creation()
         
     def window_creation(self):
+        self.label_header = tk.Label(self.master, text = 'Statistics from texts')
+        self.label_header.grid(row = 0, column = 1)
+
+        self.label_insert_text = tk.Label(self.master, text = 'Insert your text here:')
+        self.label_insert_text.grid(row = 4, column = 0)    
         self.text_entry_widget = tk.Entry(self.master)
-        self.text_entry_widget.pack(side = 'left')
+        self.text_entry_widget.grid(row = 4, column = 1)
 
         self.button_statistics_calculation = tk.Button(self.master,
-                                                       text = 'Statistics Calculation',
+                                                       text = 'Calculate',
                                                        command = self.statistics_calculation)
-        self.button_statistics_calculation.pack(side = 'left')
+        self.button_statistics_calculation.grid(row = 5, column = 1)
 
         self.label_results = tk.Label(self.master, text='')
-        self.label_results.pack(side="bottom")
+        self.label_results.grid(row = 7, column = 1)
     
     def text_capture(self):
-        return self.text_entry_widget.get() # catching text that were create in window_creation() methoded
+        return self.text_entry_widget.get() # catching text that were create in window_creation() method
         
     def statistics_calculation(self):
         text = self.text_capture()
@@ -67,7 +72,7 @@ class Text_Analyser:
     def analyse_text(self, text):
         count_words = self.count_words(text)
         count_letters = self.count_letters(text)
-        top_words = self.top_most_frequent_words(text)
+        top_words = self.top_most_frequent_words(text, only_more_than_3_letters = True)
 
         string_results = f'''
             count of words: {count_words}
